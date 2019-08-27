@@ -1104,7 +1104,7 @@ function refreshHighlighted() {
 	}
 
 	// no highlighted plane
-	if (!highlighted) {
+	if (!highlighted || !highlighted.marker) {
 		$('#highlighted_infoblock').hide();
 		return;
 	}
