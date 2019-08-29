@@ -1131,27 +1131,18 @@ function refreshHighlighted() {
 	var marker = highlighted.marker;
 	var markerCoordinates = highlighted.marker.getGeometry().getCoordinates();
     var markerPosition = OLMap.getPixelFromCoordinate(markerCoordinates);
-
-	// Check for overlap
-	//FIXME TODO: figure out this/remove this check
-	if (isPointInsideExtent(markerPosition[0], markerPosition[1], infoBoxExtent) || true) {
-		// Array of possible new positions for info box
-		var candidatePositions = [];
-		candidatePositions.push( { x: 40, y: 80 } );
-		candidatePositions.push( { x: markerPosition[0] + 20, y: markerPosition[1] + 60 } );
-
-		// Find new position
-		for (var i = 0; i < candidatePositions.length; i++) {
-			var candidatePosition = candidatePositions[i];
-			var candidateExtent = getExtent(candidatePosition.x, candidatePosition.y, infoBox.outerWidth(), infoBox.outerHeight());
-
-			if (!isPointInsideExtent(markerPosition[0],  markerPosition[1], candidateExtent) && isPointInsideExtent(candidatePosition.x, candidatePosition.y, mapExtent)) {
-				// Found a new position that doesn't overlap marker - move box to that position
-				infoBox.css("left", candidatePosition.x);
-				infoBox.css("top", candidatePosition.y);
-			}
-		}
-	}
+        var x = markerPosition[0] + 20;
+        var y = markerPosition[1] + 60;
+        var w = infoBox.outerWidth() + 20;
+        var h = infoBox.outerHeight();
+        if (x > mapCanvas.width() - w) {
+                x -= w;
+        }
+        if (y > mapCanvas.height() - h) {
+                y -= h;
+        }
+        infoBox.css("left", x);
+        infoBox.css("top", y);
 
 	if (highlighted.flight !== null && highlighted.flight !== "") {
 		$('#highlighted_callsign').text(highlighted.flight);
