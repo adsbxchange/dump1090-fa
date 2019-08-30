@@ -1127,7 +1127,7 @@ function refreshHighlighted() {
         if (y > mapCanvas.height() - h) {
                 y -= h;
         }
-        $('#highlighted_infoblock').animate({ left: x, top: y }, 500);
+        infoBox.animate({ left: x, top: y }, 500);
 
 	if (highlighted.flight !== null && highlighted.flight !== "") {
 		$('#highlighted_callsign').text(highlighted.flight);
