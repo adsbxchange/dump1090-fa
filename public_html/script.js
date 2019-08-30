@@ -1111,22 +1111,8 @@ function refreshHighlighted() {
 
 	$('#highlighted_infoblock').show();
 
-	// Get info box position and size
 	var infoBox = $('#highlighted_infoblock');
-	var infoBoxPosition = infoBox.position();
-	if (typeof infoBoxOriginalPosition.top === 'undefined') {
-		infoBoxOriginalPosition.top = infoBoxPosition.top;
-		infoBoxOriginalPosition.left = infoBoxPosition.left;
-	} else {
-		infoBox.css("left", infoBoxOriginalPosition.left);
-		infoBox.css("top", infoBoxOriginalPosition.top);
-		infoBoxPosition = infoBox.position();
-	}
-	var infoBoxExtent = getExtent(infoBoxPosition.left, infoBoxPosition.top, infoBox.outerWidth(), infoBox.outerHeight());
-
-	// Get map size
 	var mapCanvas = $('#map_canvas');
-	var mapExtent = getExtent(0, 0, mapCanvas.width(), mapCanvas.height());
 
 	var marker = highlighted.marker;
 	var markerCoordinates = highlighted.marker.getGeometry().getCoordinates();
@@ -1141,8 +1127,7 @@ function refreshHighlighted() {
         if (y > mapCanvas.height() - h) {
                 y -= h;
         }
-        infoBox.css("left", x);
-        infoBox.css("top", y);
+        $('#highlighted_infoblock').animate({ left: x, top: y }, 500);
 
 	if (highlighted.flight !== null && highlighted.flight !== "") {
 		$('#highlighted_callsign').text(highlighted.flight);
