@@ -1105,11 +1105,11 @@ function refreshHighlighted() {
 
 	// no highlighted plane
 	if (!highlighted || !highlighted.marker) {
-		$('#highlighted_infoblock').hide();
+		$('#highlighted_infoblock').fadeOut();
 		return;
 	}
 
-	$('#highlighted_infoblock').show();
+	$('#highlighted_infoblock').fadeIn(100);
 
 	var infoBox = $('#highlighted_infoblock');
 	var mapCanvas = $('#map_canvas');
