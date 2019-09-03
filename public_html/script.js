@@ -1122,7 +1122,7 @@ function refreshHighlighted() {
         var w = infoBox.outerWidth() + 20;
         var h = infoBox.outerHeight();
         if (x > mapCanvas.width() - w) {
-                x -= w;
+                x -= w + 20;
         }
         if (y > mapCanvas.height() - h) {
                 y -= h;
