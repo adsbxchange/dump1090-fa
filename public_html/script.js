@@ -1103,18 +1103,16 @@ function refreshHighlighted() {
 		highlighted = Planes[HighlightedPlane];
 	}
 
-	// no highlighted plane
-	if (!highlighted || !highlighted.marker) {
-		$('#highlighted_infoblock').fadeOut();
-		return;
-	}
-
-	$('#highlighted_infoblock').fadeIn(100);
-
 	var infoBox = $('#highlighted_infoblock');
 	var mapCanvas = $('#map_canvas');
 
-	var marker = highlighted.marker;
+	// no highlighted plane or in process of removing plane
+	if (!highlighted || !highlighted.marker) {
+		infoBox.fadeOut();
+		return;
+	}
+	infoBox.fadeIn(100);
+
 	var markerCoordinates = highlighted.marker.getGeometry().getCoordinates();
     var markerPosition = OLMap.getPixelFromCoordinate(markerCoordinates);
         var x = markerPosition[0] + 20;
